@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reserva book</title> 
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Página de Login -->
+  <div id="login" class="container active">
+    <div class="logo">
+      <img src="./i.png" alt="Reserva book Logo"> 
+    </div>
+    <h2>Login</h2>
+    <input type="text" placeholder="Usuário">
+    <input type="password" placeholder="Senha">
+    <button onclick="nextPage('termos')">ENTRAR</button>
+    <button class="link-button" onclick="nextPage('cadastro')">Criar conta</button>
+  </div>
+
+  <!-- Página de Termos de Uso -->
+  <div id="termos" class="container">
+    <div class="back" onclick="nextPage('login')">←</div>
+    <h2>Termos de Uso</h2>
+    <p class="info-text">
+     Bem Vindos ao Reservabook, ao acessar o site e utilizar os notebooks você concorda em cumprir estes termos de uso e todas as leis e regulamentos aplicáveis. Se você não concordar com alguns destes termos, não utilize o site! 
+    </p>
+    <button onclick="nextPage('reserva')">ACEITAR E CONTINUAR →</button>
+  </div>
+
+  <!-- Página de Reserva -->
+  <div id="reserva" class="container">
+    <div class="back" onclick="nextPage('termos')">←</div>
+    <h2>Reservas</h2>
+    <label for="numero-notebook">Número do notebook:</label>
+    <select id="numero-notebook">
+      <option>Notebook 01</option>
+      <option>Notebook 02</option>
+      <option>Notebook 03</option>
+      <option>Notebook 04</option>
+      <option>Notebook 05</option>
+    </select>
+
+    <label for="data-reserva">Data de Reserva:</label>
+    <input type="date" id="data-reserva">
+
+    <label for="hora-reserva">Hora de Reserva:</label>
+    <input type="time" id="hora-reserva">
+
+    <label for="horario">Horário disponível:</label>
+    <select id="horario">
+      <option>15h às 17h</option> 
+      <option>17h às 19h</option> 
+      <option>19h às 21h</option> 
+    </select>
+
+    <button onclick="nextPage('avaliacao')">CONTINUAR →</button>
+  </div>
+
+  <!-- Página de Cadastro -->
+  <div id="cadastro" class="container">
+    <div class="back" onclick="nextPage('login')">←</div>
+    <h2>Cadastro</h2>
+    <input type="text" placeholder="Digite seu nome">
+    <input type="text" placeholder="Digite seu RA"> 
+    <input type="text" placeholder="Digite sua turma">
+    <input type="text" placeholder="Digite sua senha">
+    <input type="text" placeholder="Confirme sua senha">
+    <button onclick="nextPage('login')">REGISTRAR</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
