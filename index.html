@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ReservaBook - Sistema de Reservas de Notebooks</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <div class="logo">ReservaBook</div>
+    <nav id="nav-menu">
+      <button onclick="irPara('home')">Home</button>
+      <button onclick="irPara('perfil')" id="btn-perfil" style="display:none;">Perfil</button>
+      <button onclick="logout()" id="btn-logout" style="display:none;">Sair</button>
+      <button onclick="irPara('login')" id="btn-login">Login</button>
+      <button onclick="irPara('cadastro')" id="btn-cadastro">Cadastrar</button>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- HOME -->
+    <section id="home" class="pagina active">
+      <h1>Bem-vindo ao ReservaBook</h1>
+      <p>Reserve notebooks facilmente para seu uso acadêmico ou profissional.</p>
+      <button onclick="irPara('login')">Comece Agora</button>
+    </section>
+
+    <!-- LOGIN -->
+    <section id="login" class="pagina">
+      <h2>Login</h2>
+      <form id="form-login" onsubmit="event.preventDefault(); validarLogin();">
+        <label for="login-usuario">Usuário</label>
+        <input id="login-usuario" type="text" placeholder="Digite seu usuário" />
+        <div class="erro-msg" id="erro-login-usuario"></div>
+
+        <label for="login-senha">Senha</label>
+        <input id="login-senha" type="password" placeholder="Digite sua senha" />
+        <div class="erro-msg" id="erro-login-senha"></div>
+
+        <button type="submit">Entrar</button>
+      </form>
+      <p>Não tem conta? <button class="link-button" onclick="irPara('cadastro')">Cadastre-se aqui</button></p>
+    </section>
+
+    <!-- CADASTRO -->
+    <section id="cadastro" class="pagina">
+      <h2>Cadastro</h2>
+      <form id="form-cadastro" onsubmit="event.preventDefault(); validarCadastro();">
+        <label for="cad-nome">Nome completo</label>
+        <input id="cad-nome" type="text" placeholder="Seu nome completo" />
+        <div class="erro-msg" id="erro-cad-nome"></div>
+
+        <label for="cad-ra">RA</label>
+        <input id="cad-ra" type="text" placeholder="Seu RA" />
+        <div class="erro-msg" id="erro-cad-ra"></div>
+
+        <label for="cad-turma">Turma</label>
+        <input id="cad-turma" type="text" placeholder="Sua turma" />
+        <div class="erro-msg" id="erro-cad-turma"></div>
+
+        <label for="cad-senha">Senha</label>
+        <input id="cad-senha" type="password" placeholder="Crie uma senha" />
+        <div class="erro-msg" id="erro-cad-senha"></div>
+
+        <label for="cad-confirmar-senha">Confirmar senha</label>
+        <input id="cad-confirmar-senha" type="password" placeholder="Confirme sua senha" />
+        <div class="erro-msg" id="erro-cad-confirmar"></div>
+
+        <button type="submit">Registrar</button>
+      </form>
+      <p>Já tem conta? <button class="link-button" onclick="irPara('login')">Faça login</button></p>
+    </section>
+
+    <!-- RESERVA -->
+    <section id="reserva" class="pagina">
+      <h2>Reservar Notebook</h2>
+      <form id="form-reserva" onsubmit="event.preventDefault(); validarReserva();">
+        <label for="res-notebook">Notebook</label>
+        <select id="res-notebook">
+          <option value="">Selecione um notebook</option>
+          <option>Notebook 01</option>
+          <option>Notebook 02</option>
+          <option>Notebook 03</option>
+          <option>Notebook 04</option>
+          <option>Notebook 05</option>
+        </select>
+        <div class="erro-msg" id="erro-res-notebook"></div>
+
+        <label for="res-data">Data</label>
+        <input id="res-data" type="date" min="" />
+        <div class="erro-msg" id="erro-res-data"></div>
+
+        <label for="res-hora">Hora</label>
+        <input id="res-hora" type="time" />
+        <div class="erro-msg" id="erro-res-hora"></div>
+
+        <label for="res-horario">Período</label>
+        <select id="res-horario">
+          <option value="">Selecione um período</option>
+          <option>15h às 17h</option>
+          <option>17h às 19h</option>
+          <option>19h às 21h</option>
+        </select>
+        <div class="erro-msg" id="erro-res-horario"></div>
+
+        <button type="submit">Confirmar Reserva</button>
+      </form>
+
+      <h3>Minhas Reservas</h3>
+      <ul id="lista-reservas" class="lista-reservas"></ul>
+    </section>
+
+    <!-- PERFIL -->
+    <section id="perfil" class="pagina">
+      <h2>Perfil do Usuário</h2>
+      <div id="dados-usuario">
+        <p><strong>Nome:</strong> <span id="perfil-nome"></span></p>
+        <p><strong>RA:</strong> <span id="perfil-ra"></span></p>
+        <p><strong>Turma:</strong> <span id="perfil-turma"></span></p>
+      </div>
+      <button onclick="irPara('reserva')">Fazer uma Reserva</button>
+      <button onclick="irPara('avaliacao')">Avaliar o Aplicativo</button>
+    </section>
+
+    <!-- AVALIACAO -->
+    <section id="avaliacao" class="pagina">
+      <h2>Avaliação do Aplicativo</h2>
+      <form id="form-avaliacao" onsubmit="event.preventDefault(); enviarAvaliacao();">
+        <label>Nota:</label>
+        <div id="estrelas" class="estrelas-avaliacao">
+          <span data-valor="1">☆</span>
+          <span data-valor="2">☆</span>
+          <span data-valor="3">☆</span>
+          <span data-valor="4">☆</span>
+          <span data-valor="5">☆</span>
+        </div>
+        <div class="erro-msg" id="erro-avaliacao-nota"></div>
+
+        <label for="aval-texto">Comentário (opcional)</label>
+        <textarea id="aval-texto" placeholder="Escreva aqui sua opinião..."></textarea>
+
+        <button type="submit">Enviar Avaliação</button>
+      </form>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2025 ReservaBook - Todos os direitos reservados</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
